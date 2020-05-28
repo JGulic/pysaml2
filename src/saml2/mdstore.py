@@ -577,6 +577,10 @@ class InMemoryMetaData(MetaData):
         :return: list of service descriptions.
             Or if no binding was specified a list of 2-tuples (binding, srv)
         """
+        print (typ)
+        print (service)
+        print (entity_id)
+        print (self)
         try:
             srvs = []
             for t in self[entity_id][typ]:
@@ -589,6 +593,9 @@ class InMemoryMetaData(MetaData):
 
         if not srvs:
             return srvs
+
+        print ('WE ARE IN THE OTHER SERVICE')
+        print (srvs)
 
         if binding:
             res = []
@@ -1078,7 +1085,8 @@ class MetadataStore(MetaData):
 
     def single_sign_on_service(self, entity_id, binding=None, typ="idpsso"):
         # IDP
-
+        print ("WE ARE IN IDP SSO")
+        print (binding)
         if binding is None:
             binding = BINDING_HTTP_REDIRECT
         return self.service(entity_id, "idpsso_descriptor",
@@ -1148,6 +1156,8 @@ class MetadataStore(MetaData):
 
     def assertion_consumer_service(self, entity_id, binding=None, _="spsso"):
         # SP
+        print ("WE ARE IN assertion_consumer_service")
+        print (binding)
         if binding is None:
             binding = BINDING_HTTP_POST
         return self.service(entity_id, "spsso_descriptor",

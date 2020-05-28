@@ -98,7 +98,10 @@ class SAML2Plugin(object):
         self.rememberer_name = rememberer_name
         self.wayf = wayf
         self.saml_client = saml_client
+        print ('INIT')
+        print (saml_client)
         self.conf = config
+        print (config)
         self.cache = cache
         self.discosrv = discovery
         self.idp_query_param = idp_query_param
@@ -274,6 +277,8 @@ class SAML2Plugin(object):
     def challenge(self, environ, _status, _app_headers, _forget_headers):
 
         _cli = self.saml_client
+        print ('CHALLENGE')
+        print (environ)
 
         if "REMOTE_USER" in environ:
             name_id = decode(environ["REMOTE_USER"])
@@ -323,8 +328,9 @@ class SAML2Plugin(object):
         else:
             entity_id = response
             logger.info("[sp.challenge] entity_id: %s", entity_id)
-            # Do the AuthnRequest
-            # Use POST binding for MAX.gov
+            print (entity_id)
+            # # Do the AuthnRequest
+            # # Use POST binding for MAX.gov
             _binding = BINDING_HTTP_POST
             try:
                 srvs = _cli.metadata.single_sign_on_service(entity_id, _binding)
